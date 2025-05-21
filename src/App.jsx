@@ -12,6 +12,12 @@ const App = () => {
     fetchBooks();
   }, []);
 
+  const API_URL = process.env.REACT_APP_API_URL;
+
+fetch(⁠ ${API_URL}/api/books ⁠)
+  .then(res => res.json())
+  .then(data => console.log(data));
+  
   const fetchBooks = async () => {
     const res = await fetch(API);
     const data = await res.json();
