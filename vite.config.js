@@ -6,10 +6,9 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:3000',
+      base: './',
     },
   },
 })
-// vite.config.js
-export default {
-  base: './',
-};
+
+
