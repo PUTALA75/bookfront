@@ -9,3 +9,7 @@ export default defineConfig({
     },
   },
 })
+// vite.config.js
+export default {
+  base: './',
+};
