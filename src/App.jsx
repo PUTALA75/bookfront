@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const API = 'http://localhost:3000/api/book';
+const API = process.env.REACT_APP_API_BASE_URL;
 
 const App = () => {
   const [books, setBooks] = useState([]);
@@ -12,12 +12,6 @@ const App = () => {
     fetchBooks();
   }, []);
 
-  const API_URL = process.env.REACT_APP_API_URL;
-
-fetch(`${API_URL}/api/books`)
-  .then(res => res.json())
-  .then(data => console.log(data));
-  
   const fetchBooks = async () => {
     const res = await fetch(API);
     const data = await res.json();
@@ -31,9 +25,9 @@ fetch(`${API_URL}/api/books`)
 
     const res = await fetch(editingId ? `${API}/${editingId}` : API, {
       method: editingId ? 'PUT' : 'POST',
-      headers: { 
+      headers: {
         'Content-Type': 'application/json'
-       },
+      },
       body: JSON.stringify(body)
     });
 
@@ -75,19 +69,15 @@ fetch(`${API_URL}/api/books`)
     <div style={{ padding: '2rem', fontFamily: 'sans-serif', maxWidth: '900px', margin: 'auto' }}>
       <h2 style={{ textAlign: 'center' }}>📚 Book Manager</h2>
 
- 
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(3, 1fr)',
         gap: '1rem',
         marginBottom: '1rem'
       }}>
-        <input name="title" value={form.title} onChange={handleChange} placeholder="Title"
-          style={{ padding: '0.5rem' }} />
-        <input name="author" value={form.author} onChange={handleChange} placeholder="Author"
-          style={{ padding: '0.5rem' }} />
-        <input name="publishedYear" value={form.publishedYear} onChange={handleChange}
-          placeholder="Published Year (e.g., 2020)" style={{ padding: '0.5rem' }} />
+        <input name="title" value={form.title} onChange={handleChange} placeholder="Title" style={{ padding: '0.5rem' }} />
+        <input name="author" value={form.author} onChange={handleChange} placeholder="Author" style={{ padding: '0.5rem' }} />
+        <input name="publishedYear" value={form.publishedYear} onChange={handleChange} placeholder="Published Year (e.g., 2020)" style={{ padding: '0.5rem' }} />
         <button onClick={handleSubmit} style={{
           gridColumn: 'span 3',
           padding: '0.5rem',
@@ -97,7 +87,6 @@ fetch(`${API_URL}/api/books`)
         }}>{editingId ? 'Update' : 'Add'} Book</button>
       </div>
 
-  
       <div style={{ display: 'flex', gap: '1rem', marginBottom: '1rem' }}>
         <input type="file" accept=".csv" onChange={e => setFile(e.target.files[0])} />
         <button onClick={handleImport} style={{
@@ -108,7 +97,6 @@ fetch(`${API_URL}/api/books`)
         }}>Import CSV</button>
       </div>
 
-     
       <div style={{
         display: 'grid',
         gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
