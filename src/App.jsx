@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-const API = process.env.REACT_APP_API_BASE_URL;
+
 
 const App = () => {
   const [books, setBooks] = useState([]);
   const [form, setForm] = useState({ title: '', author: '', publishedYear: '' });
   const [editingId, setEditingId] = useState(null);
   const [file, setFile] = useState(null);
+
+  const API = process.env.REACT_APP_API_BASE_URL;
 
   useEffect(() => {
     fetchBooks();
